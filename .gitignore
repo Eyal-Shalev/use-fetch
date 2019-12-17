@@ -1,0 +1,5 @@
+# OS & IDE
+.idea
+
+node_modules
+build
