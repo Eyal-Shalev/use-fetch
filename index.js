@@ -4,21 +4,27 @@ import {useState, useEffect} from 'react';
  *
  * @param input
  * @param init
- * @param inputs If present, fetch will only activate if the values in the list change.
  * @returns {{controller: AbortController, response: Response, error: *}}
  */
-export const useFetch = (input, init, inputs) => {
-  const controller = new AbortController();
+export const useFetch = (input, init) => {
+  const [controller, setController] = useState(new AbortController());
   const [response, setResponse] = useState();
-  const [loading, setLoading]  = useState(false);
+  const [loading, setLoading] = useState(false);
   const [exception, setException] = useState();
+  const reload = () => {
+    controller.abort();
+    setController(new AbortController());
+  };
   const [useJson, useText, useBlob] = ['json', 'text', 'blob'].map(k => (
     (initial) => {
       const [result, setResult] = useState(initial);
       const [exception, setException] = useState();
       useEffect(() => {
         if (!response) return;
-        response[k]().then(setResult).catch(e => {console.log(e); setException(e)})
+        response[k]().then(setResult).catch(e => {
+          console.log(e);
+          setException(e)
+        })
       }, [response]);
       return {[k]: result, exception};
     }
@@ -41,7 +47,7 @@ export const useFetch = (input, init, inputs) => {
       })
       .catch(setException)
       .finally(() => setLoading(false));
-  }, inputs);
+  }, [controller]);
 
-  return {response, loading, exception, controller, useJson, useText, useBlob}
+  return {response, reload, loading, exception, controller, useJson, useText, useBlob}
 };

@@ -23,7 +23,7 @@ function App() {
             <LinkContainer className="nav-item" exact={true} to='/' activeClassName='active'>
               <Link className="nav-link" to='/'>Home </Link>
             </LinkContainer>
-            <LinkContainer className="nav-item" exact={true} to='/demo' activeClassName='active'>
+            <LinkContainer className="nav-item" to='/demo' activeClassName='active'>
               <Link className="nav-link" to="/demo">Demo</Link>
             </LinkContainer>
           </ul>
