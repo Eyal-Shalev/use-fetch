@@ -1,5 +1,12 @@
 # OS & IDE
 .idea
 
+# Node modules
 node_modules
+
+# Compilation
+lib
 build
+
+# TypeScript incremental compilation cache
+*.tsbuildinfo

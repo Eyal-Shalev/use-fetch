@@ -1,18 +1,29 @@
 {
-  "name": "use-fetch",
+  "name": "@eyalsh/use-fetch",
   "version": "1.0.0",
   "description": "Exposes the fetch API as a react hook",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "type": "commonjs",
+  "types": "./lib/index.d.ts",
   "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eyal-shalev/use-fetch.git"
   },
-  "author": "",
+  "author": "Eyal Shalev <eyalsh@gmail.com>",
   "license": "ISC",
   "peerDependencies": {
     "react": "^16.12.0"
-  }
+  },
+  "devDependencies": {
+    "@types/node": "^13.1.6",
+    "@types/react": "^16.9.17",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.4"
+  },
+  "homepage": "https://eyal-shalev.github.io/use-fetch"
 }

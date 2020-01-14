@@ -2,6 +2,6 @@ import React from 'react';
 
 export const About = () => {
   return (
-    <main>Hello from about</main>
+    <main className='container'>Hello from about</main>
   );
 };

@@ -29,7 +29,7 @@ function App() {
           </ul>
         </header>
       </div>
-      <section className='container'>
+      <section>
         <Switch>
           <Route path='/demo'>
             <Demo />
