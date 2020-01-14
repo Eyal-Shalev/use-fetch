@@ -1,6 +1,22 @@
 import {useState, useEffect} from 'react';
 
-const useFetch = (url: string, args: object = {}, dependencies = []) => {
+export class ResponseError extends Error {
+  public readonly name = ResponseError.name;
+
+  constructor(public readonly response: Response) {
+    super(response.statusText !== '' ? response.statusText : response.status.toString());
+    Error.captureStackTrace(this, ResponseError);
+  }
+}
+
+const throwIfNotOk = (response: Response) => {
+  if (response.status !== 200) {
+    throw new ResponseError(response)
+  }
+  return response
+};
+
+const useFetch = (url: string, args: RequestInit = {}, dependencies = []) => {
   const [response, setResponse] = useState<Response | null>(null);
   const [loading, setLoading] = useState(false);
   const [exception, setException] = useState<any>(null);
@@ -10,6 +26,7 @@ const useFetch = (url: string, args: object = {}, dependencies = []) => {
     setLoading(true);
 
     fetch(url, args)
+      .then(throwIfNotOk)
       .then(setResponse)
       .catch(setException)
       .finally(() => setLoading(false));
@@ -19,7 +36,7 @@ const useFetch = (url: string, args: object = {}, dependencies = []) => {
 };
 
 function make<T>(k: 'text' | 'blob' | 'json', init0: T) {
-  return <K extends T>(url: string, args: object = {}, init: K = init0 as K) => {
+  return <K extends T>(url: string, args: RequestInit = {}, init: K = init0 as K) => {
     const {response, exception: fetchException, loading} = useFetch(url, args);
     const [value, setValue] = useState<K>(init);
     const [exception, setException] = useState<any>(fetchException);
