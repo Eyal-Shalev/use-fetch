@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.posts {
+  max-height: calc(100vh - (4 * 0.5rem) - 1.5rem);
+  overflow-y: auto;
+}
+
+.post { max-height: calc(100vh - (4 * 0.5rem) - 1.5rem) }
+.post.card .card-body {
+  overflow-y: auto;
+}

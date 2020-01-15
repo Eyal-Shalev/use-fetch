@@ -1,4 +1,4 @@
-import {useJson} from "@eyalsh/use-fetch";
+import {useJson, useText} from "@eyalsh/use-fetch";
 import * as React from "react";
 import {createContext, ReactNode} from "react";
 
@@ -76,3 +76,5 @@ export const useComments = (post?: Post) => {
 
   return {comments, loading, exception};
 };
+
+export const useReadme = () => useText('https://raw.githubusercontent.com/Eyal-Shalev/use-fetch/master/README.md');

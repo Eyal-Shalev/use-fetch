@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {
   HashRouter as Router,
@@ -10,33 +9,51 @@ import {
 import {LinkContainer} from 'react-router-bootstrap'
 import {About} from "./About";
 import {Demo} from "./Demo";
-
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import NavbarToggle from "react-bootstrap/NavbarToggle";
+import NavbarCollapse from "react-bootstrap/NavbarCollapse";
+import NavItem from "react-bootstrap/NavItem";
+import NavLink from "react-bootstrap/NavLink";
+import NavbarBrand from "react-bootstrap/NavbarBrand";
+// className='navbar navbar-collapse'
 function App() {
   return (
     <Router basename={process.env.PUBLIC_URL}>
-      <header className='navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar'>
-        <Link className='navbar-brand mr-0 mr-md-2' to='/'>
-          <img src={logo} alt='logo' width={36} height={36}/>
-        </Link>
-        <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-          <LinkContainer className="nav-item" exact={true} to='/' activeClassName='active'>
-            <Link className="nav-link" to='/'>Home </Link>
+      <Navbar expand='sm' bg='dark' variant='dark' sticky='top'>
+        <Container>
+          <LinkContainer to='/' exact={true}>
+            <NavbarBrand as={Link} to='/'>use-fetch</NavbarBrand>
           </LinkContainer>
-          <LinkContainer className="nav-item" to='/demo' activeClassName='active'>
-            <Link className="nav-link" to="/demo">Demo</Link>
-          </LinkContainer>
-        </ul>
-      </header>
-      <section>
-        <Switch>
-          <Route path='/demo'>
-            <Demo />
-          </Route>
-          <Route path='/'>
-            <About />
-          </Route>
-        </Switch>
-      </section>
+          <NavbarToggle />
+          <NavbarCollapse>
+            <Nav>
+              <LinkContainer exact={true} to='/' activeClassName='active'>
+                <NavItem>
+                  <NavLink as={Link} to='/'>Home</NavLink>
+                </NavItem>
+              </LinkContainer>
+              <LinkContainer to='/demo' activeClassName='active'>
+                <NavItem>
+                  <NavLink as={Link} to='/demo'>Demo</NavLink>
+                </NavItem>
+              </LinkContainer>
+              <NavItem>
+                <NavLink href='https://github.com/Eyal-Shalev/use-fetch'>GitHub</NavLink>
+              </NavItem>
+            </Nav>
+          </NavbarCollapse>
+        </Container>
+      </Navbar>
+      <Switch>
+        <Route path='/demo'>
+          <Demo />
+        </Route>
+        <Route path='/'>
+          <About />
+        </Route>
+      </Switch>
     </Router>
   );
 }

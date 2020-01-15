@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "@eyalsh/use-fetch": "file:..",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.1.2",
@@ -10,14 +11,18 @@
     "@types/react": "^16.9.17",
     "@types/react-router-bootstrap": "^0.24.5",
     "@types/react-router-dom": "^5.1.3",
+    "bootstrap": "^4.4.1",
+    "node-sass": "^4.13.0",
+    "prismjs": "^1.19.0",
     "react": "^16.12.0",
+    "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0",
+    "react-markdown": "^4.3.1",
     "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
     "ts-node": "^8.6.2",
-    "typescript": "^3.7.4",
-    "@eyalsh/use-fetch": "file:.."
+    "typescript": "^3.7.4"
   },
   "scripts": {
     "start": "react-scripts start",
