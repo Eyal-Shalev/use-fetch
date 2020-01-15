@@ -1,16 +1,19 @@
 import React, {useContext} from "react";
 import {UsersContext} from "./data";
+import CardColumns from "react-bootstrap/CardColumns";
+import Card from "react-bootstrap/Card";
 
 export const Users = () => {
   const users = useContext(UsersContext);
   return (
-    <ul className='card-columns'>
+    <CardColumns>
       {users.map(user => (
-        <li key={user.id} className='card'>
-          <header className='card-header'>
-            <h3 className='card-title'>{user.name} (<em>{user.username}</em>)</h3>
-          </header>
-          <main className='card-body'>
+        <Card key={user.id}>
+          <Card.Header as='header'>
+            <Card.Title>{user.name}</Card.Title>
+            <Card.Subtitle>{user.username}</Card.Subtitle>
+          </Card.Header>
+          <Card.Body>
             <details style={{display: !user.address ? 'none' : 'block'}}>
               <summary>Address</summary>
               <address>
@@ -27,9 +30,9 @@ export const Users = () => {
               <summary>Company</summary>
               <pre>{JSON.stringify(user.company, null, '\t')}</pre>
             </details>
-          </main>
-        </li>
+          </Card.Body>
+        </Card>
       ))}
-    </ul>
+    </CardColumns>
   )
 };

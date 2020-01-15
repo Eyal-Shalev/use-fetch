@@ -18,7 +18,7 @@
     "strict": true,
     "noImplicitAny": true,
     "alwaysStrict": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",

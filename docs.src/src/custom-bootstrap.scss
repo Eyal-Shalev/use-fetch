@@ -22,3 +22,27 @@ $container-max-widths: map_merge($container-max-widths, (
   padding-left: 0;
   padding-right: 0;
 }
+
+a.card {
+  @extend a:not([href])
+}
+
+//
+// Columns
+//
+
+.card-columns {
+  @include media-breakpoint-up(md) {
+    column-count: $card-columns-count + 1;
+  }
+  @include media-breakpoint-up(lg) {
+    column-count: $card-columns-count + 2;
+  }
+  @include media-breakpoint-up(xl) {
+    column-count: $card-columns-count + 4;
+  }
+}
+
+.modal-fluid {
+  max-width: min-content;
+}
