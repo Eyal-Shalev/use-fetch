@@ -21,7 +21,7 @@ export const Demo = (props) => {
   return <WithUsers><WithPosts><WithAlbums><WithPhotos>
     <Container fluid={true} {...props}>
       <Row>
-        <aside className='col-md-1'>
+        <aside className='col-md-1 demo-nav'>
           <Nav variant='pills' className='flex-column'>
             <LinkContainer to='/demo/posts' activeClassName='active'>
               <Link className="nav-link" to='/demo/posts'>Posts </Link>

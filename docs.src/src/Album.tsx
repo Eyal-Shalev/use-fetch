@@ -1,7 +1,7 @@
 import React, {Reducer, useContext, useEffect, useReducer, useState} from 'react';
 import CardColumns from "react-bootstrap/CardColumns";
 import {useParams} from "react-router-dom";
-import {AlbumsContext, Photo, PhotosContext} from "./data";
+import {Album as AlbumT, AlbumsContext, Photo, PhotosContext} from "./data";
 import Card from "react-bootstrap/Card";
 import CardImg from "react-bootstrap/CardImg";
 import Modal from "react-bootstrap/Modal";
@@ -16,10 +16,10 @@ import Row from "react-bootstrap/Row";
 import ModalDialog from "react-bootstrap/ModalDialog";
 import CloseButton from "react-bootstrap/CloseButton";
 
-export const Album = (props: { [k: string]: any }) => {
+export const Album = ({className, ...props}: { [k: string]: any }) => {
   const albums = useContext(AlbumsContext);
   const {id} = useParams();
-  const [activeAlbum, setActiveAlbum] = useState();
+  const [activeAlbum, setActiveAlbum] = useState<AlbumT|undefined>();
   useEffect(() => {
     if (!id) return;
     if (albums.length === 0) return;
@@ -52,22 +52,14 @@ export const Album = (props: { [k: string]: any }) => {
 
   const [activePhoto, setActivePhoto] = useState<Photo | undefined>();
 
-  return <>
-    <Row as='nav' className='justify-content-center'>
-      <Pagination size='lg'>
-        <Prev disabled={currentPage.page === 0}/>
-        {paginationSize < 11 &&
-        Array.from({length: paginationSize}, (v, k) => k).map(i => (
-          <PageItem key={i} active={currentPage.page === i} onClick={() => setPage(i)}>{i + 1}</PageItem>
-        ))}
-
-        <Next disabled={currentPage.page === pageSize - 1}/>
-      </Pagination>
+  return <main className={`album-page  ${className || ''}`} {...props}>
+    <Row as='header' className='justify-content-center'>
+      <h3>{activeAlbum && activeAlbum.title}</h3>
     </Row>
-    <Row>
-      <CardColumns {...props} className={`fade ${albumPhotos.length > 0 ? 'show' : ''}`}>
+    <Row className='gallery'>
+      <CardColumns className={`fade ${albumPhotos.length > 0 ? 'show' : ''}`}>
         {currentPage.photos.map(photo => (
-          <Card key={photo.id} onClick={() => setActivePhoto(photo)}>
+          <Card key={photo.id} onClick={() => setActivePhoto(photo)} style={{cursor: 'pointer'}}>
             <CardImg variant='top' src={photo.thumbnailUrl}/>
             <Card.ImgOverlay>
               <Card.Title>{photo.title}</Card.Title>
@@ -75,6 +67,20 @@ export const Album = (props: { [k: string]: any }) => {
           </Card>
         ))}
       </CardColumns>
+    </Row>
+    <Row as='footer' className='justify-content-center'>
+      <nav>
+        <Pagination style={{marginBottom: '0.5rem', marginTop: '0.5rem'}}>
+          <Prev disabled={currentPage.page === 0} onClick={() => setPage(currentPage.page - 1)}/>
+
+          {Array.from({length: paginationSize}, (v, k) => k).map(i => (
+            <PageItem key={i} active={currentPage.page === i} onClick={() => setPage(i)}>{i + 1}</PageItem>
+          ))}
+
+          <Next disabled={currentPage.page === paginationSize - 1}
+                onClick={() => setPage(currentPage.page + 1)}/>
+        </Pagination>
+      </nav>
     </Row>
     <Modal dialogClassName='modal-fluid' show={!!activePhoto} onHide={() => setActivePhoto(undefined)}>
       <ModalHeader>
@@ -85,5 +91,5 @@ export const Album = (props: { [k: string]: any }) => {
         <Image src={activePhoto && activePhoto.url} alt={activePhoto && activePhoto.title}/>
       </ModalBody>
     </Modal>
-  </>;
+  </main>;
 };
