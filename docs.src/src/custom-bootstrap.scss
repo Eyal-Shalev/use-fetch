@@ -13,36 +13,7 @@ $container-max-widths: map_merge($container-max-widths, (
 
 @import "~bootstrap/scss/bootstrap";
 
-.col.row {
-  margin-left: 0;
-  margin-right: 0;
+.dropdown-menu {
+  .bg-dark & { background-color: $dark }
 }
 
-.col.card {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-a.card {
-  @extend a:not([href])
-}
-
-//
-// Columns
-//
-
-.card-columns {
-  @include media-breakpoint-up(md) {
-    column-count: $card-columns-count + 1;
-  }
-  @include media-breakpoint-up(lg) {
-    column-count: $card-columns-count + 2;
-  }
-  @include media-breakpoint-up(xl) {
-    column-count: $card-columns-count + 4;
-  }
-}
-
-.modal-fluid {
-  max-width: min-content;
-}

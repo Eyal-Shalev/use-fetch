@@ -1,12 +1,9 @@
 {
-  "name": "github-pages",
-  "version": "0.1.0",
+  "name": "docs",
+  "version": "1.0.0",
   "private": true,
   "devDependencies": {
     "@eyalsh/use-fetch": "file:..",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.1.2",
     "@types/node": "^13.1.6",
     "@types/react": "^16.9.17",
     "@types/react-router-bootstrap": "^0.24.5",
